@@ -1,0 +1,41 @@
+{
+  "name": "@swissglider/react_skeleton_iob_thehome_lib",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/swisglider"
+  },
+  "version": "0.0.1",
+  "description": "This is an addon to the react_skeleton_framework and handles the ioBroker part that connects to the theHome adapters",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rollup": "rollup -c"
+  },
+  "keywords": [
+    "swissglider",
+    "thehome",
+    "iobroker",
+    "skeleton",
+    "react"
+  ],
+  "author": "swissglider",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.3",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.1",
+    "@types/react": "^17.0.43",
+    "react": "^18.0.0",
+    "rollup": "^2.70.1",
+    "rollup-plugin-dts": "^4.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.6.3"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts"
+}
