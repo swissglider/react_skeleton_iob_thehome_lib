@@ -39,6 +39,11 @@ jobs:
         run: echo "${{ steps.MYVARIABLE.outputs.MYVARIABLE }} - ${{ steps.MYVARIABLE1.outputs.MYVARIABLE }}"
       - name: Tt
         id: tt
-        run: echo "::set-output name=TEST::$(echo ./test.json)"
+        run: |
+          content=`cat ./test.json`
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=TEST::$content"
       - name: aa
         run: echo "${{ steps.tt.outputs.TEST }}"
