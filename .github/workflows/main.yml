@@ -39,4 +39,4 @@ jobs:
       - name: File contents
         run: echo "${{ steps.read_file.outputs.content }}"
       - name: source
-        run: source ./test.test echo $MYVARIABLE
+        run: source ./test.test; echo $MYVARIABLE
