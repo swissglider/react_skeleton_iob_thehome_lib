@@ -7,7 +7,7 @@ on:
       - 'Release*'
 
 jobs:
-  justEcho1:
+  justEcho:
     runs-on: ubuntu-latest
     steps:
       - run: echo "schaumer mal"
