@@ -34,7 +34,7 @@ jobs:
           "create_pages"
         ]
     outputs:
-      NOT_THE_SAME_VERSION: ${{ env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION }}
+      NOT_THE_SAME_VERSION: ${{ steps.check_Version.outputs.notTheSameVersion }}
       ACTION_MODE: ${{ fromJson(env.TEST_TEST).actionMode }}
     steps:
       - name: Checkout code
@@ -68,11 +68,14 @@ jobs:
       - name: "show last npm package version"
         run: |
           echo "NPM_LATEST_PACKAGE_VERSION=${{steps.RLNPV.outputs.var1}}" >> $GITHUB_ENV
+      - name: check versions
+        id: check_Version
+        run: echo "::set-output name=notTheSameVersion::$(${{ fromJson(env.PACKAGE_JSON).version }} != ${{steps.RLNPV.outputs.var1}})"
       - name: "is the same version"
-        if: env.PACKAGE_JSON_VERSION == env.NPM_LATEST_PACKAGE_VERSION
+        if: steps.check_Version.outputs.notTheSameVersion == false
         run: echo "::warning file=package.json::Same Version on NPM and packages.json"
       - name: "not the same version"
-        if: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
+        if: steps.check_Version.outputs.notTheSameVersion == true
         run: echo "::notice file=package.json::Not the same Version on NPM and packages.json"
   publish:
       needs: [file_contents]
