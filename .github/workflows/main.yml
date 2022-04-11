@@ -62,3 +62,5 @@ jobs:
         run: echo "${{env}}"
       - name: wholeGithub
         run: echo "${{github.ref}}"
+      - name: testNotice
+        run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon" 
