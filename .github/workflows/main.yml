@@ -26,6 +26,13 @@ jobs:
   #       run: echo "Hallo Test ${{ github.ref }}"
   file_contents:
     runs-on: ubuntu-latest
+    env:
+      ACCEPTED_ACTION_MODES: |
+        [
+          "deploy",
+          "publish",
+          "create_pages"
+        ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -42,8 +49,12 @@ jobs:
           cat ./test.json >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: setActionMode
-        run: |
-          echo '${{ fromJson(env.TEST_TEST).string1 }} - ${{ fromJson(env.TEST_TEST).string2 }}'
-          echo "actionMode=${{ fromJson(env.TEST_TEST).actionMode }}" >> $GITHUB_ENV
+        run: echo "ACTION_MODE=${{ fromJson(env.TEST_TEST).actionMode }}" >> $GITHUB_ENV
       - name: printActionMode
-        run: echo '${{env.actionMode}}'
+        run: echo '${{env.ACTION_MODE}}'
+      - name: correctActionMode
+        if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE)
+        run: echo "Action Mode is ok"
+      - name: wrongActionMode
+        if: ! contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE)
+        run: echo "Action Mode is not ok"
