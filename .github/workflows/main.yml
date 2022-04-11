@@ -7,14 +7,20 @@ on:
       - 'Release*'
 
 jobs:
-  justEcho:
+  justEcho1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "schaumer mal"
+  justEchoTest:
+    if: startsWith(github.ref, 'refs/tags/Test')
+    needs: [justEcho1]
     runs-on: ubuntu-latest
     steps:
       - name: Just echo Test
-        if: startsWith(github.ref, 'refs/tags/Test') 
         run: echo "Hallo Test ${{ github.ref }}"
+  justEchoRelease:
+    if: startsWith(github.ref, 'refs/tags/Release') 
+    runs-on: ubuntu-latest
+    steps:
       - name: Just echo Release
-        if: startsWith(github.ref, 'refs/tags/Release') 
-        run: echo "Hallo Test ${{ github.ref }}"
-      - name: Just echo
         run: echo "Hallo Test ${{ github.ref }}"
