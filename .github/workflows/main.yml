@@ -45,9 +45,9 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=TEST::$content"
-      - name: aa
-        run: | 
-          echo "${{ steps.tt.outputs.TEST }}" | jq "{string1: .[].string1}"
+      # - name: aa
+      #   run: | 
+      #     echo "${{ steps.tt.outputs.TEST }}" | jq "{string1: .[].string1}"
       - name: zz
         run: |
           echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
