@@ -34,7 +34,7 @@ jobs:
           "create_pages"
         ]
     outputs:
-      NOT_THE_SAME_VERSION: ${{ env.PACKAGE_JSON_VERSION }} != ${{ env.NPM_LATEST_PACKAGE_VERSION }}
+      NOT_THE_SAME_VERSION: ${{ env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION }}
       ACTION_MODE: ${{ fromJson(env.TEST_TEST).actionMode }}
     steps:
       - name: Checkout code
