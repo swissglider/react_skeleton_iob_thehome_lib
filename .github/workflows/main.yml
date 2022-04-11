@@ -45,4 +45,4 @@ jobs:
         id: MYVARIABLE1
         run: sed -n -e '/$string2/ s/.*\= *//p' ./test.test
       - name: Output
-        run: echo "${{ steps.MYVARIABLE }} - ${{ steps.MYVARIABLE1 }}"
+        run: echo "${{ steps.MYVARIABLE.outputs }} - ${{ steps.MYVARIABLE1.outputs }}"
