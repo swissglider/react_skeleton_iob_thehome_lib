@@ -55,4 +55,4 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
       - name: zz1
         run: |
-          echo '${{ fromJson(env.TEST_TEST).string1 }} - ${{ fromJson(env.TEST_TEST).string1 }}'
+          echo '${{ fromJson(env.TEST_TEST).string1 }} - ${{ fromJson(env.TEST_TEST).string2 }}'
