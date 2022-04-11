@@ -42,7 +42,8 @@ export const MetaDataGrid: FC<any> = React.memo(() => {
             { name: 'min', type: 'string' },
             { name: 'max', type: 'string' },
             { name: 'saveToHistory', type: 'boolean' },
-            { name: 'additionalPositionInfo', type: 'array' },
+            // { name: 'additionalPositionInfo', type: 'array' },
+            { name: 'additionalPositionInfo', type: 'string' },
             { name: 'all', type: 'any', map: (o: any) => o },
         ],
         hierarchy: {

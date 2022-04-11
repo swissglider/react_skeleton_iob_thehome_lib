@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { Title, Subtitle, Description, Primary, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
 import { Skeleton } from '@swissglider/react_skeleton_framework';
-import { IOBApp } from '../../index';
+import { IOBApp } from '@swissglider/react_skeleton_iob_thehome_lib';
+import 'jqwidgets-scripts/jqwidgets/styles/jqx.base.css';
+import 'jqwidgets-scripts/jqwidgets/styles/jqx.metrodark.css';
 
 export default {
-    title: 'Internal/components/IOBMetaDataGridComponent',
+    title: 'App/IOBApp',
     argTypes: {},
     args: {},
     parameters: {

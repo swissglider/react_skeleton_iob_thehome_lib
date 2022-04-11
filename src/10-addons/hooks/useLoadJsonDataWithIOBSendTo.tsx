@@ -27,7 +27,6 @@ export const useLoadJsonDataWithIOBSendTo = (
                 timeout: timeOut,
             })
             .then((ha: any) => {
-                console.log(ha.data);
                 if (ha.data.result.error) {
                     if (ha.data.error.errorType === 'timeout') {
                         messageState.addCritical(
