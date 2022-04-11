@@ -39,8 +39,8 @@ jobs:
       - name: File contents
         run: echo "${{ steps.read_file.outputs.content }}"
       - name: MYVARIABLE
-        run: source ./test.test; echo $MYVARIABLE
+        run: sed -n -e '/$MYVARIABLE/ s/.*\= *//p' ./test.test
       - name: MYVARIABLE1
-        run: source ./test.test; echo $MYVARIABLE1
+        run: sed -n -e '/$MYVARIABLE1/ s/.*\= *//p' ./test.test
       - name: Output
         run: echo "${{steps.MYVARIABLE.outputs}} - ${{steps.MYVARIABLE1.outputs}}"
