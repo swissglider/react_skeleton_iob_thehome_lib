@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Just Eco
-        run: echo "Hallo Guido"
+        run: echo "Hallo Guido ${{ github.ref }}"
