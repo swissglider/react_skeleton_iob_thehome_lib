@@ -36,6 +36,6 @@ jobs:
         id: read_file
         uses: andstor/file-reader-action@v1
         with:
-          path: package.json
+          path: test.test
       - name: File contents
-        run: echo "${{ steps.read_file.outputs.contents }}"
+        run: echo "${{ steps.read_file.outputs }}"
