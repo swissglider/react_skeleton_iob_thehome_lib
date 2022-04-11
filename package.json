@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/swisglider"
   },
-  "version": "0.0.15",
+  "version": "0.0.17",
   "description": "This is an addon to the react_skeleton_framework and handles the ioBroker part that connects to the theHome adapters",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
     "gitDeleteAllTagsRemote": "git tag -l | grep Test_ | xargs -n 1 git push --delete origin",
     "gitDeleteAllTags": "npm run gitDeleteAllTagsRemote && npm run gitDeleteAllTagsLocal",
     "gitAddTag": "git tag -a Test_$npm_package_version -m Test && git push origin Test_$npm_package_version",
-    "swissi": "npm version patch --no-git-tag-version && npm run gitAddTag"
+    "swissi": "npm run gitAddTag"
   },
   "keywords": [
     "swissglider",
