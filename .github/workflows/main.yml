@@ -73,7 +73,7 @@ jobs:
         run: echo "PACKAGE_JSON_VERSION=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_ENV
       - name: "read last npm package version"
         run: |
-          echo "::set-output name=var1::$(npm view @$github.repository version)"
+          echo "::set-output name=var1::${{npm view @$github.repository version}}"
       # - name: "show last npm package version"
       #   run: |
       #     echo "${{env.NPM_LATEST_PACKAGE_VERSION}}"
