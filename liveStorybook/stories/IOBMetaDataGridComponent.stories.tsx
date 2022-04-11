@@ -24,7 +24,7 @@ export default {
                 );
             },
             description: {
-                component: 'All MetaData from the ioBroker TheHome Generator Adapters',
+                component: 'All MetaData from the ioBroker TheHome Generator Adapters!',
             },
         },
     },
