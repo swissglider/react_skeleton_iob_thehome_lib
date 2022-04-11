@@ -83,7 +83,7 @@ jobs:
         run: echo "::warning file=app.js,line=1,col=5,endColumn=7::Same Version on NPM and packages.json"
       - name: "is the same version"
         if: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
-        run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Not the same Version on NPM and packages.json"
+        run: echo "::notice ::Not the same Version on NPM and packages.json"
   publish:
       runs-on: ubuntu-latest
       steps:
