@@ -50,9 +50,9 @@ jobs:
       #     echo "${{ steps.tt.outputs.TEST }}" | jq "{string1: .[].string1}"
       - name: zz
         run: |
-          echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
-          cat ./package.json >> $GITHUB_ENV
+          echo 'TEST_TEST<<EOF' >> $GITHUB_ENV
+          cat ./test.json >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: zz1
         run: |
-          echo '${{ fromJson(env.PACKAGE_JSON).version }}'
+          echo '${{ fromJson(env.TEST_TEST).string1 }} - ${{ fromJson(env.TEST_TEST).string1 }}'
