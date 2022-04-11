@@ -2,9 +2,9 @@ name: Test
 
 on:
   push:
-    tags:
-      - 'Test*'
-      - 'Release*'
+    # tags:
+    #   - 'Test*'
+    #   - 'Release*'
 
 jobs:
   # justEcho1:
@@ -28,12 +28,14 @@ jobs:
     # if: startsWith(github.ref, 'refs/tags/Release') 
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
       - name: Echo ls
         run: ls -la && pwd
       - name: Read package.json
         id: package
-        uses: juliangruber/read-file-action@v1
+        uses: andstor/file-reader-action@v1
         with:
-          path: ./package.json
+          path: package.json
       - name: Echo package.json
         run: echo "${{ steps.package.outputs.content }}"
