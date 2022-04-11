@@ -73,7 +73,7 @@ jobs:
         run: echo "PACKAGE_JSON_VERSION=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_ENV
   autopublish:
         name: Publish release if package.json version was bumped
-        runs-on: ubuntu-20.04
+        runs-on: macos-latest
         steps:
             - name: Check out repository
               uses: actions/checkout@v2
