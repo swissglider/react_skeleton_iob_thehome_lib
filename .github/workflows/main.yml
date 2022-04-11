@@ -74,11 +74,9 @@ jobs:
       - name: "read last npm package version"
         run: |
           echo "::set-output name=var1::$(npm view @$github.repository version)"
-          echo "@${{github.repository}}"
-          echo 'NPM_LATEST_PACKAGE_VERSION=${npm view @$github.repository version}' >> $GITHUB_ENV
-      - name: "show last npm package version"
-        run: |
-          echo "${{env.NPM_LATEST_PACKAGE_VERSION}}"
+      # - name: "show last npm package version"
+      #   run: |
+      #     echo "${{env.NPM_LATEST_PACKAGE_VERSION}}"
  # publish:
   #   runs-on: ubuntu-latest
   #   steps:
