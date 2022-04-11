@@ -3,7 +3,7 @@
   "version": "0.0.17",
   "description": "This is an addon to the react_skeleton_framework and handles the ioBroker part that connects to the theHome adapters",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo hallo",
     "rollup": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
