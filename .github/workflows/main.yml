@@ -32,10 +32,10 @@ jobs:
         uses: actions/checkout@v1
       - name: Echo ls
         run: ls -la && pwd
-      - name: Read package.json
-        id: package
+      - name: Read file contents
+        id: read_file
         uses: andstor/file-reader-action@v1
         with:
           path: package.json
-      - name: Echo package.json
-        run: echo "${{ steps.package.outputs.content }}"
+      - name: File contents
+        run: echo "${ steps.read_file.outputs.contents }"
