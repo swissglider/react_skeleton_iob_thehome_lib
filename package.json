@@ -13,7 +13,7 @@
     "gitDeleteAllTagsLocal": "git tag | grep Test_ | xargs git tag -d",
     "gitDeleteAllTagsRemote": "git tag -l | grep Test_ | xargs -n 1 git push --delete origin",
     "gitDeleteAllTags": "npm run gitDeleteAllTagsRemote && npm run gitDeleteAllTagsLocal",
-    "gitAddTag": "git tag -a Test_$npm_package_version -m Test && git push origin Test_$npm_package_version",
+    "gitAddTag": "timestamp=$(date \"+%s\") && git tag -a Test_$timestamp -m Test && git push origin Test_$timestamp",
     "swissi": "npm run gitAddTag"
   },
   "keywords": [
