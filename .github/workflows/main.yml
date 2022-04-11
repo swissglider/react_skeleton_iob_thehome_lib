@@ -64,12 +64,13 @@ jobs:
         run: echo "${{github.ref}}"
       - name: testNotice
         run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
-      - name: "read package.json version"
+      - name: "read package.json"
         run: |
           echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
           cat ./package.json >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-          # echo "PACKAGE_JSON_VERSION=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_ENV
+      - name: "read package.json version"
+        run: echo "PACKAGE_JSON_VERSION=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_ENV
       - name: "read last npm package version"
         run: |
           echo "@${{github.repository}}"
