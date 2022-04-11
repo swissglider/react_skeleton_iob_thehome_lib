@@ -19,3 +19,8 @@ jobs:
     steps:
       - name: Just echo Release
         run: echo "Hallo Release ${{ github.ref }}"
+  justEcho: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Just echo
+        run: echo "Hallo ${{ github.ref }}"
