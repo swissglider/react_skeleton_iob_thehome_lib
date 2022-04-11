@@ -80,7 +80,7 @@ jobs:
           echo "NOT_THE_SAME_VERSION=true" >> $GITHUB_ENV
   publish:
       needs: [file_contents]
-      # if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
+      if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == true
       runs-on: ubuntu-latest
       steps:
         - name: actionMode
