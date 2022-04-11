@@ -31,23 +31,11 @@ jobs:
         uses: actions/checkout@v1
       - name: MYVARIABLE
         id: MYVARIABLE
-        run: echo "::set-output name=MYVARIABLE::$(sed -n -e '/$string1/ s/.*\= *//p' ./test.test)"
-      - name: MYVARIABLE1
-        id: MYVARIABLE1
-        run: echo "::set-output name=MYVARIABLE::$(sed -n -e '/$string2/ s/.*\= *//p' ./test.test)"
+        run: | 
+          echo "::set-output name=var1::$(sed -n -e '/$string1/ s/.*\= *//p' ./test.test)"
+          echo "::set-output name=var2::$(sed -n -e '/$string2/ s/.*\= *//p' ./test.test)"
       - name: Output
-        run: echo "${{ steps.MYVARIABLE.outputs.MYVARIABLE }} - ${{ steps.MYVARIABLE1.outputs.MYVARIABLE }}"
-      - name: Tt
-        id: tt
-        run: |
-          content=`cat ./test.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=TEST::$content"
-      # - name: aa
-      #   run: | 
-      #     echo "${{ steps.tt.outputs.TEST }}" | jq "{string1: .[].string1}"
+        run: echo "${{ steps.MYVARIABLE.outputs.var1 }} - ${{ steps.MYVARIABLE.outputs.var1 }}"
       - name: zz
         run: |
           echo 'TEST_TEST<<EOF' >> $GITHUB_ENV
