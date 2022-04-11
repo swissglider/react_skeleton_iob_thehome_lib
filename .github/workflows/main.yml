@@ -8,17 +8,17 @@ on:
 
 jobs:
   echoTest:
-    if: startsWith(${{ github.ref }}, 'refs/tags/Test') 
+    if: startsWith(github.ref, 'refs/tags/Test') 
     runs-on: ubuntu-latest
     steps:
       - name: Just echo Test
         run: echo "Hallo Test ${{ github.ref }}"
   echoRelease:
-    if: startsWith(${{ github.ref }}, 'refs/tags/Release') 
+    if: startsWith( github.ref , 'refs/tags/Release') 
     runs-on: ubuntu-latest
     steps:
       - name: Just echo Release
-        run: echo "Hallo Release ${{ github.ref }}"
+        run: echo "Hallo Release ${{ github.ref }} ${{startsWith( github.ref , 'refs/tags/Release')}}"
   justEcho: 
     runs-on: ubuntu-latest
     steps:
