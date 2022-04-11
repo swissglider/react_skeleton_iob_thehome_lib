@@ -64,17 +64,12 @@ jobs:
         run: echo "${{github.ref}}"
       - name: testNotice
         run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
-      - name: "read package.json"
+      - name: Check package version
+        id: cpv
+        uses: PostHog/check-package-version@v2
+
+      - name: Echo output
         run: |
-          echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
-          cat ./package.json >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-      - name: "read package.json version"
-        run: echo "PACKAGE_JSON_VERSION=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_ENV
-      - name: "read last npm package version"
-        id: RLNPV
-        run: |
-          npm view @swissglider/react_skeleton_iob_thehome_lib version
-      - name: "show last npm package version"
-        run: |
-          echo "${{ steps.RLNPV.outputs.var1 }}"
+            echo "Committed version: ${{ steps.cpv.outputs.committed-version }}"
+            echo "Published version: ${{ steps.cpv.outputs.published-version }}"
+            echo "Is new version: ${{ steps.cpv.outputs.is-new-version }}"
