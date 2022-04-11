@@ -74,5 +74,4 @@ jobs:
       - name: "read last npm package version"
         run: |
           echo "@${{github.repository}}"
-          npm_latest="${npm view @$github.repository version}"
-          echo 'NPM_LATEST_PACKAGE_VERSION=$npm_latest' >> $GITHUB_ENV
+          echo 'NPM_LATEST_PACKAGE_VERSION=${npm view @$github.repository version}' >> $GITHUB_ENV
