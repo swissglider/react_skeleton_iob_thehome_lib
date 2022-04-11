@@ -90,6 +90,8 @@ jobs:
         with:
           access_token: ${{ github.token }}
   publish:
+      needs: [file_contents]
+      if: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v1
