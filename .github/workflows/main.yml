@@ -27,16 +27,15 @@ jobs:
   file_contents:
     runs-on: ubuntu-latest
     steps:
-      - name: Just echo Test
-        run: pwd && ls -la && cd .. && pwd && ls -la
       - name: Checkout code
         uses: actions/checkout@v1
-
+      - name: Just echo Test
+        run: pwd && ls -la
       - name: Read file contents
         id: read_file
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./build/package.json
+          path: ./package.json
 
       - name: File contents
         run: echo "${{ steps.read_file.outputs.content }}"
