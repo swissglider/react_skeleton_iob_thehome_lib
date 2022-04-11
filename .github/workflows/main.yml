@@ -80,7 +80,7 @@ jobs:
           echo "NPM_LATEST_PACKAGE_VERSION=${{steps.RLNPV.outputs.var1}}" >> $GITHUB_ENV
       - name: "is the same version"
         if: env.PACKAGE_JSON_VERSION == env.NPM_LATEST_PACKAGE_VERSION
-        run: echo "::warning file=app.js,line=1,col=5,endColumn=7::Same Version on NPM and packages.json"
+        run: echo "::warning ::Same Version on NPM and packages.json"
       - name: "is the same version"
         if: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
         run: echo "::notice ::Not the same Version on NPM and packages.json"
