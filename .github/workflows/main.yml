@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v1
       - name: MYVARIABLE
         id: MYVARIABLE
-        run: echo "::set-output name=MYVARIABLE::$(sed -n -e '/$string1/ s/.*\= *//p' ./test.test)""
+        run: echo "::set-output name=MYVARIABLE::$(sed -n -e '/$string1/ s/.*\= *//p' ./test.test)"
       - name: MYVARIABLE1
         id: MYVARIABLE1
         run: echo "::set-output name=MYVARIABLE::$(sed -n -e '/$string2/ s/.*\= *//p' ./test.test)"
