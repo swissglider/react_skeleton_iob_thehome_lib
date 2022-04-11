@@ -28,12 +28,12 @@ jobs:
     # if: startsWith(github.ref, 'refs/tags/Release') 
     runs-on: ubuntu-latest
     steps:
+      - name: Echo ls
+        run: ls -la
       - name: Read package.json
         id: package
         uses: juliangruber/read-file-action@v1
         with:
           path: ./package.json
-      - name: Echo ls
-        run: ls -la
       - name: Echo package.json
         run: echo "${{ steps.package.outputs.content }}"
