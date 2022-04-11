@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/swisglider"
   },
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "This is an addon to the react_skeleton_framework and handles the ioBroker part that connects to the theHome adapters",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
