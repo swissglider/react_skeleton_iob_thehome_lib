@@ -34,17 +34,11 @@ jobs:
           "create_pages"
         ]
     outputs:
-      notTheSameStatus: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
+      NOT_THE_SAME_VERSION: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
+      ACTION_MODE: fromJson(env.TEST_TEST).actionMode
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: MYVARIABLE
-        id: MYVARIABLE
-        run: | 
-          echo "::set-output name=var1::$(sed -n -e '/$string1/ s/.*\= *//p' ./test.test)"
-          echo "::set-output name=var2::$(sed -n -e '/$string2/ s/.*\= *//p' ./test.test)"
-      - name: Output
-        run: echo "${{ steps.MYVARIABLE.outputs.var1 }} - ${{ steps.MYVARIABLE.outputs.var2 }}"
       - name: readJson
         run: |
           echo 'TEST_TEST<<EOF' >> $GITHUB_ENV
@@ -60,12 +54,6 @@ jobs:
       - name: wrongActionMode
         if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE) == false
         run: echo "Action Mode is not ok"
-      - name: wholeEnv
-        run: echo "${{env}}"
-      - name: wholeGithub
-        run: echo "${{github.ref}}"
-      - name: testNotice
-        run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
       - name: "read package.json"
         run: |
           echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
@@ -88,9 +76,11 @@ jobs:
         run: echo "::notice file=package.json::Not the same Version on NPM and packages.json"
   publish:
       needs: [file_contents]
-      if: needs.file_contents.outputs.notTheSameStatus == true
+      if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == true
       runs-on: ubuntu-latest
       steps:
+        - name: actionMode
+          run: echo "${{needs.file_contents.outputs.ACTION_MODE}}"
         - uses: actions/checkout@v1
         - uses: actions/setup-node@v1
           with:
