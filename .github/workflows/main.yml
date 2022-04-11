@@ -46,4 +46,4 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=TEST::$content"
       - name: aa
-        run: echo "${{ steps.tt.outputs.TEST }}"
+        run: echo "${{ steps.tt.outputs.TEST.string1 }} - ${{ steps.tt.outputs.TEST.string2 }}"
