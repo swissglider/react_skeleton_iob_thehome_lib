@@ -2,5 +2,5 @@
     "string1" : "Any string",
     "string2" : "Any string2",
     "description" : "deploy = Hallo",
-    "actionMode" : "deploy1"
+    "actionMode" : "deploy"
 }
