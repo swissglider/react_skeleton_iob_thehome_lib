@@ -84,16 +84,17 @@ jobs:
       - name: "is the same version"
         if: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
         run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Not the same Version on NPM and packages.json"
- # publish:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v1
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 14
-  #     - run: npm install
-  #     - run: npm test
-  #     - uses: JS-DevTools/npm-publish@v1
-  #       with:
-  #         token: ${{ secrets.NPM_TOKEN }}
-  #         access: public
+  publish:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - uses: actions/setup-node@v1
+          with:
+            node-version: 14
+        - run: npm install
+        - run: npm test
+        - uses: JS-DevTools/npm-publish@v1
+          with:
+            token: ${{ secrets.NPM_TOKEN }}
+            access: public
+            check-version: true
