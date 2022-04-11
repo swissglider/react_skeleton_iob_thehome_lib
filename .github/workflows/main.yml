@@ -47,4 +47,4 @@ jobs:
           echo "::set-output name=TEST::$content"
       - name: aa
         run: | 
-          echo "${{ steps.tt.outputs.TEST.string1 }}" | jq "{id: .[].id}"
+          echo "${{ steps.tt.outputs.TEST }}" | jq "{string1: .[].string1}"
