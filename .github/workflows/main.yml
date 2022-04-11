@@ -69,12 +69,12 @@ jobs:
         run: |
           echo "NPM_LATEST_PACKAGE_VERSION=${{steps.RLNPV.outputs.var1}}" >> $GITHUB_ENV
       - name: "is the same version"
-        if: env.PACKAGE_JSON_VERSION == env.NPM_LATEST_PACKAGE_VERSION
+        if: fromJson(env.PACKAGE_JSON).version == steps.RLNPV.outputs.var1
         run: |
           echo "::warning file=package.json::Same Version on NPM and packages.json"
           echo "NOT_THE_SAME_VERSION=false" >> $GITHUB_ENV
       - name: "not the same version"
-        if: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
+        if: fromJson(env.PACKAGE_JSON).version != steps.RLNPV.outputs.var1
         run: |
           echo "::notice file=package.json::Not the same Version on NPM and packages.json"
           echo "NOT_THE_SAME_VERSION=true" >> $GITHUB_ENV
