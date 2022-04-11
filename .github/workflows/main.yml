@@ -39,4 +39,4 @@ jobs:
           path: ./build/package.json
 
       - name: File contents
-        run: $RUNNER_TEMP
+        run: echo "${{ steps.read_file.outputs.content }}"
