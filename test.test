@@ -1,2 +1,2 @@
-string1 = Any string
-string2 = Any string2
+$string1 = Any string
+$string2 = Any string2
