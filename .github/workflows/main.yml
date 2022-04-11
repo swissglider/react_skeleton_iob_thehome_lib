@@ -7,23 +7,23 @@ on:
       - 'Release*'
 
 jobs:
-  justEcho1:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "schaumer mal"
-  justEchoTest:
-    if: startsWith(github.ref, 'refs/tags/Test')
-    needs: [justEcho1]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Just echo Test
-        run: echo "Hallo Test ${{ github.ref }}"
-  justEchoRelease:
-    if: startsWith(github.ref, 'refs/tags/Release') 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Just echo Release
-        run: echo "Hallo Test ${{ github.ref }}"
+  # justEcho1:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "schaumer mal"
+  # justEchoTest:
+  #   if: startsWith(github.ref, 'refs/tags/Test')
+  #   needs: [justEcho1]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Just echo Test
+  #       run: echo "Hallo Test ${{ github.ref }}"
+  # justEchoRelease:
+  #   if: startsWith(github.ref, 'refs/tags/Release') 
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Just echo Release
+  #       run: echo "Hallo Test ${{ github.ref }}"
   package:
     # if: startsWith(github.ref, 'refs/tags/Release') 
     runs-on: ubuntu-latest
@@ -33,5 +33,7 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./package.json
+      - name: Echo ls
+        run: ls -la
       - name: Echo package.json
         run: echo "${{ steps.package.outputs.content }}"
