@@ -73,7 +73,7 @@ jobs:
         run: echo "PACKAGE_JSON_VERSION=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_ENV
       - name: "read last npm package version"
         id: RLNPV
-        run: npm view @hookstate/core version
+        run: npm view @swissglider/react_skeleton_iob_thehome_lib version
       - name: "show last npm package version"
         run: |
           echo "${{ steps.RLNPV.outputs.var1 }}"
