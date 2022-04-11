@@ -58,3 +58,5 @@ jobs:
       - name: wrongActionMode
         if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE) == false
         run: echo "Action Mode is not ok"
+      - name: wholeEnv
+        run: echo "${{env}}"
