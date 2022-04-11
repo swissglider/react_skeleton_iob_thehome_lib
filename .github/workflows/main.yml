@@ -4,10 +4,15 @@ on:
   push:
     tags:
       - 'Test*'
+      - 'Release*'
 
 jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      - name: Just Eco
+      - name: Just echo Test
+        if: startsWith(${{ github.ref }}, 'Test') 
+        run: echo "Hallo Guido ${{ github.ref }}"
+      - name: Just echo Release
+        if: startsWith(${{ github.ref }}, 'Release') 
         run: echo "Hallo Guido ${{ github.ref }}"
