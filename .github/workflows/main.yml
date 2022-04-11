@@ -1,0 +1,13 @@
+name: Test
+
+on:
+  push:
+    tags:
+      - 'test'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Just Eco
+        run: echo "Hallo Guido"
