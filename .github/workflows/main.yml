@@ -79,8 +79,15 @@ jobs:
       # - name: "show last npm package version"
       #   run: |
       #     echo "${{ steps.RLNPV.outputs.var1 }}"
-  getVersions:
-    runs-on: macos-latest
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: get npm package version
-        run: npm view @swissglider/react_skeleton_iob_thehome_lib version
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
