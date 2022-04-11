@@ -61,4 +61,4 @@ jobs:
       - name: wholeEnv
         run: echo "${{env}}"
       - name: wholeGithub
-        run: echo "${{github}}"
+        run: echo "${{github.ref}}"
