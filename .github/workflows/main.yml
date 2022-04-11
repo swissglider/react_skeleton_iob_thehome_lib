@@ -33,6 +33,8 @@ jobs:
           "publish",
           "create_pages"
         ]
+    outputs:
+      notTheSameStatus: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -86,7 +88,7 @@ jobs:
         run: echo "::notice file=package.json::Not the same Version on NPM and packages.json"
   publish:
       needs: [file_contents]
-      if: env.PACKAGE_JSON_VERSION != env.NPM_LATEST_PACKAGE_VERSION
+      if: notTheSameStatus == true
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v1
