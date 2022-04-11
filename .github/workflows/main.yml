@@ -56,5 +56,5 @@ jobs:
         if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE)
         run: echo "Action Mode is ok"
       - name: wrongActionMode
-        if: ! contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE)
+        if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE) === false
         run: echo "Action Mode is not ok"
