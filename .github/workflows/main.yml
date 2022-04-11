@@ -7,12 +7,15 @@ on:
       - 'Release*'
 
 jobs:
-  echo:
+  echoTest:
+    if: startsWith(${{ github.ref }}, 'refs/tags/Test') 
     runs-on: ubuntu-latest
     steps:
       - name: Just echo Test
-        if: startsWith(${{ github.ref }}, 'Test') 
-        run: echo "Hallo Guido ${{ github.ref }}"
+        run: echo "Hallo Test ${{ github.ref }}"
+  echoRelease:
+    if: startsWith(${{ github.ref }}, 'refs/tags/Release') 
+    runs-on: ubuntu-latest
+    steps:
       - name: Just echo Release
-        if: startsWith(${{ github.ref }}, 'Release') 
-        run: echo "Hallo Guido ${{ github.ref }}"
+        run: echo "Hallo Release ${{ github.ref }}"
