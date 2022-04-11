@@ -80,26 +80,26 @@ jobs:
           echo "NOT_THE_SAME_VERSION='true'" >> $GITHUB_ENV
   publish:
       needs: [file_contents]
-      if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
+      # if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
       runs-on: ubuntu-latest
       steps:
         - name: actionMode
           run: | 
             echo "${{needs.file_contents.outputs.ACTION_MODE}}"
             echo "${{needs.file_contents.outputs.NOT_THE_SAME_VERSION}}"
-        - uses: actions/checkout@v1
-        - uses: actions/setup-node@v1
-          with:
-            node-version: 14
-        - run: npm install
-        - run: npm test
-        - uses: JS-DevTools/npm-publish@v1
-          id: publish
-          with:
-            token: ${{ secrets.NPM_TOKEN }}
-            access: public
-            check-version: true
-        - name: show versions
-          # if: steps.publish.outputs.type != 'none'
-          run: |
-            echo "::notice file=package.json::Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }} -- ${{ steps.publish.outputs.type }}"
+        # - uses: actions/checkout@v1
+        # - uses: actions/setup-node@v1
+        #   with:
+        #     node-version: 14
+        # - run: npm install
+        # - run: npm test
+        # - uses: JS-DevTools/npm-publish@v1
+        #   id: publish
+        #   with:
+        #     token: ${{ secrets.NPM_TOKEN }}
+        #     access: public
+        #     check-version: true
+        # - name: show versions
+        #   # if: steps.publish.outputs.type != 'none'
+        #   run: |
+        #     echo "::notice file=package.json::Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }} -- ${{ steps.publish.outputs.type }}"
