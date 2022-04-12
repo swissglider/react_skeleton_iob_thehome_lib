@@ -81,10 +81,10 @@ jobs:
         run: |
           echo "${{env.ACTION_MODE_OK}}"
       - name: wrongActionMode
-        if: env.ACTION_MODE_OK == false
+        if: env.ACTION_MODE_OK == 'false'
         run: echo "Action Mode is not ok"
       - name: rightActionMode
-        if: env.ACTION_MODE_OK == true
+        if: env.ACTION_MODE_OK == 'true'
         run: echo "Action Mode is ok"
       # - uses: actions/checkout@v1
       # - uses: actions/setup-node@v1
