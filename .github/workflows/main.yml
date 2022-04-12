@@ -77,6 +77,9 @@ jobs:
       - name: add action mode status
         run: |
           echo "ACTION_MODE_OK=${{contains(env.ACCEPTED_ACTION_MODES, needs.file_contents.outputs.ACTION_MODE) == true}}" >> $GITHUB_ENV
+      - name: pring2
+        run: |
+          echo "env.ACTION_MODE_OK"
       - name: wrongActionMode
         if: env.ACTION_MODE_OK == false
         run: echo "Action Mode is not ok"
