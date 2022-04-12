@@ -17,7 +17,12 @@ jobs:
       # - run: git show $REVISION:$FILENAME
       - id: test
         run: |
-          echo "::set-output name=npm_version::$(npm view @${{github.repository}} version)"
           echo "::set-output name=ghp::$(git branch -a | grep -q 'remotes/origin/gh-pages' && echo $?)"
-      - run: echo "${{steps.test.outputs.npm_version}}"
       - run: echo "${{steps.test.outputs.ghp}}"
+      # - run: echo "ACTION_MODE=${{ fromJson(env.TEST_TEST).actionMode }}" >> $GITHUB_ENV
+      - name: is gh-pages available
+        if: steps.test.outputs.ghp == 0
+        run: echo "available"
+      - name: is gh-pages not available
+        if: steps.test.outputs.ghp != 0
+        run: echo "not available"
