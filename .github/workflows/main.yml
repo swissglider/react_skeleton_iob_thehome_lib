@@ -1,94 +1,105 @@
-name: Test
+# name: Test
 
-on:
-  push:
-    # tags:
-    #   - 'Test*'
-    #   - 'Release*'
+# on:
+#   push:
+#     # tags:
+#     #   - 'Test*'
+#     #   - 'Release*'
 
-env:
-  ACCEPTED_ACTION_MODES: |
-    [
-      "deploy",
-      "publish",
-      "create_pages"
-    ]
+# jobs:
+#   # justEcho1:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - run: echo "schaumer mal"
+#   # justEchoTest:
+#   #   if: startsWith(github.ref, 'refs/tags/Test')
+#   #   needs: [justEcho1]
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - name: Just echo Test
+#   #       run: echo "Hallo Test ${{ github.ref }}"
+#   # justEchoRelease:
+#   #   if: startsWith(github.ref, 'refs/tags/Release') 
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - name: Just echo Release
+#   #       run: echo "Hallo Test ${{ github.ref }}"
+#   read_variables:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       NOT_THE_SAME_VERSION: ${{fromJson(env.PACKAGE_JSON).version != steps.RLNPV.outputs.npm_version}}
+#       ACTION_MODE: ${{ fromJson(env.CONFIG_FILE).actionMode }}
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+#       - name: readJson
+#         run: |
+#           echo 'CONFIG_FILE<<EOF' >> $GITHUB_ENV
+#           cat ./test.json >> $GITHUB_ENV
+#           echo 'EOF' >> $GITHUB_ENV
+#       - name: wrongActionMode
+#         if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE) == false
+#         run: echo "Action Mode is not ok"
+#       - name: "read package.json"
+#         run: |
+#           echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
+#           cat ./package.json >> $GITHUB_ENV
+#           echo 'EOF' >> $GITHUB_ENV
+#       - name: "read last npm package version"
+#         id: RLNPV
+#         run: |
+#           echo "::set-output name=npm_version::$(npm view @${{github.repository}} version)"
+#       - name: output all
+#         run: |
+#           echo "::notice file=read_variables::Version changed: ${{fromJson(env.PACKAGE_JSON).version}} => ${{steps.RLNPV.outputs.npm_version}}"
+#           echo "::notice file=read_variables::NOT_THE_SAME_VERSION = ${{fromJson(env.PACKAGE_JSON).version != steps.RLNPV.outputs.npm_version}}"
+#           echo "::notice file=read_variables::ACTION_MODE = ${{ fromJson(env.CONFIG_FILE).actionMode }}"
 
-jobs:
-  # justEcho1:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo "schaumer mal"
-  # justEchoTest:
-  #   if: startsWith(github.ref, 'refs/tags/Test')
-  #   needs: [justEcho1]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Just echo Test
-  #       run: echo "Hallo Test ${{ github.ref }}"
-  # justEchoRelease:
-  #   if: startsWith(github.ref, 'refs/tags/Release') 
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Just echo Release
-  #       run: echo "Hallo Test ${{ github.ref }}"
-  file_contents:
-    runs-on: ubuntu-latest
-    outputs:
-      NOT_THE_SAME_VERSION: ${{fromJson(env.PACKAGE_JSON).version != steps.RLNPV.outputs.npm_version}}
-      ACTION_MODE: ${{ fromJson(env.CONFIG_FILE).actionMode }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: readJson
-        run: |
-          echo 'CONFIG_FILE<<EOF' >> $GITHUB_ENV
-          cat ./test.json >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-      - name: wrongActionMode
-        if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE) == false
-        run: echo "Action Mode is not ok"
-      - name: "read package.json"
-        run: |
-          echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
-          cat ./package.json >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-      - name: "read last npm package version"
-        id: RLNPV
-        run: |
-          echo "::set-output name=npm_version::$(npm view @${{github.repository}} version)"
-      - name: output all
-        run: |
-          echo "::notice file=file_contents::Version changed: ${{fromJson(env.PACKAGE_JSON).version}} => ${{steps.RLNPV.outputs.npm_version}}"
-          echo "::notice file=file_contents::NOT_THE_SAME_VERSION = ${{fromJson(env.PACKAGE_JSON).version != steps.RLNPV.outputs.npm_version}}"
-          echo "::notice file=file_contents::ACTION_MODE = ${{ fromJson(env.CONFIG_FILE).actionMode }}"
-
-  publish:
-    if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
-    runs-on: ubuntu-latest
-    needs: [file_contents]
-    steps:
-      - name: add action mode status
-        run: echo "ACTION_MODE_OK=${{contains(env.ACCEPTED_ACTION_MODES, needs.file_contents.outputs.ACTION_MODE) == true}}" >> $GITHUB_ENV
-      - name: wrongActionMode
-        if: env.ACTION_MODE_OK == 'false'
-        run: echo "Action Mode is not ok"
-      - name: rightActionMode
-        if: env.ACTION_MODE_OK == 'true'
-        run: echo "Action Mode is ok"
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - run: npm install
-      - run: npm test
-      - uses: JS-DevTools/npm-publish@v1
-        id: publish
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
-          check-version: true
-      - name: show versions
-        # if: steps.publish.outputs.type != 'none'
-        run: |
-          echo "::notice file=package.json::Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }} -- ${{ steps.publish.outputs.type }}"
+#   publish_to_npm:
+#     env:
+#       ACCEPTED_ACTION_MODES: |
+#         [
+#           "deploy",
+#           "publish",
+#           "create_pages"
+#         ]
+#     if: needs.read_variables.outputs.NOT_THE_SAME_VERSION == 'true'
+#     runs-on: ubuntu-latest
+#     needs: [read_variables]
+#     steps:
+#       - name: add action mode status
+#         run: echo "ACTION_MODE_OK=${{contains(env.ACCEPTED_ACTION_MODES, needs.read_variables.outputs.ACTION_MODE) == true}}" >> $GITHUB_ENV
+#       - name: wrongActionMode
+#         if: env.ACTION_MODE_OK == 'false'
+#         run: echo "Action Mode is not ok"
+#       - name: rightActionMode
+#         if: env.ACTION_MODE_OK == 'true'
+#         run: echo "Action Mode is ok"
+#       - uses: actions/checkout@v1
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: 16
+#       - run: npm install
+#       - run: npm test
+#       - uses: JS-DevTools/npm-publish@v1
+#         id: publish
+#         with:
+#           token: ${{ secrets.NPM_TOKEN }}
+#           access: public
+#           check-version: true
+#       - name: show versions
+#         # if: steps.publish.outputs.type != 'none'
+#         run: |
+#           echo "::notice file=package.json::Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }} -- ${{ steps.publish.outputs.type }}"
+  
+#   deploy_storybook_to_github_pages:
+#     env:
+#       ACCEPTED_ACTION_MODES: |
+#         [
+#           "deploy",
+#           "publish",
+#           "create_pages"
+#         ]
+#     if: needs.read_variables.outputs.NOT_THE_SAME_VERSION == 'true'
+#     runs-on: ubuntu-latest
+#     needs: [read_variables]
