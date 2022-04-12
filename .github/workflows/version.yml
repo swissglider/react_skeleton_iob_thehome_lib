@@ -16,5 +16,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       # - run: git show $REVISION:$FILENAME
       - id: test
-        run: git branch -a | grep -q 'remotes/origin/gh-pages' && echo $?
-      - run: echo "${{steps.RLNPV.outputs.npm_version}}"
+        run: git branch -a | grep -q 'remotes/origin/gh-pages' && echo echo "::set-output name=${{$!}}"
+      - run: echo "${{steps.test.outputs.npm_version}}"
