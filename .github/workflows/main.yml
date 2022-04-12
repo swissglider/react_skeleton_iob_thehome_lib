@@ -69,6 +69,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [file_contents]
     steps:
+      - name: print
+        run: | 
+          echo "::notice file=package.json::Version changed: ${{needs.file_contents.outputs.ACTION_MODE}}" 
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
