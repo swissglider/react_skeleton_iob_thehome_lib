@@ -73,37 +73,30 @@ jobs:
         run: |
           echo "::notice file=package.json::Not the same Version on NPM and packages.json"
           echo "NOT_THE_SAME_VERSION=true" >> $GITHUB_ENV
+      - name: output all
+        run: |
+          echo "::notice file=package.json::NOT_THE_SAME_VERSION = ${{ env.NOT_THE_SAME_VERSION }}"
+          echo "::notice file=package.json::NOT_THE_SAME_VERSION = fromJson(env.PACKAGE_JSON).version == steps.RLNPV.outputs.npm_version"
+          echo "::notice file=package.json::ACTION_MODE = ${{ fromJson(env.TEST_TEST).actionMode }}"
 
   publish:
       if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
       runs-on: ubuntu-latest
       needs: [file_contents]
       steps:
-        - name: actionMode
-          run: | 
-            echo "${{needs.file_contents.outputs.ACTION_MODE}}"
-            echo "${{needs.file_contents.outputs.NOT_THE_SAME_VERSION}}"
-        - name: The Same
-          if: contains(needs.file_contents.outputs.NOT_THE_SAME_VERSION, 'false')
-          run: | 
-            echo "::error file=package.json::Same Version on NPM and packages.json"
-        - name: Not The Same
-          if: contains(needs.file_contents.outputs.NOT_THE_SAME_VERSION, 'true')
-          run: | 
-            echo "::error file=package.json::Not the same Version on NPM and packages.json"
-        # - uses: actions/checkout@v1
-        # - uses: actions/setup-node@v1
-        #   with:
-        #     node-version: 14
-        # - run: npm install
-        # - run: npm test
-        # - uses: JS-DevTools/npm-publish@v1
-        #   id: publish
-        #   with:
-        #     token: ${{ secrets.NPM_TOKEN }}
-        #     access: public
-        #     check-version: true
-        # - name: show versions
-        #   # if: steps.publish.outputs.type != 'none'
-        #   run: |
-        #     echo "::notice file=package.json::Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }} -- ${{ steps.publish.outputs.type }}"
+        - uses: actions/checkout@v1
+        - uses: actions/setup-node@v1
+          with:
+            node-version: 14
+        - run: npm install
+        - run: npm test
+        - uses: JS-DevTools/npm-publish@v1
+          id: publish
+          with:
+            token: ${{ secrets.NPM_TOKEN }}
+            access: public
+            check-version: true
+        - name: show versions
+          # if: steps.publish.outputs.type != 'none'
+          run: |
+            echo "::notice file=package.json::Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }} -- ${{ steps.publish.outputs.type }}"
