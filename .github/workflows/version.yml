@@ -21,8 +21,8 @@ jobs:
       - run: echo "${{steps.test.outputs.ghp}}"
       # - run: echo "ACTION_MODE=${{ fromJson(env.TEST_TEST).actionMode }}" >> $GITHUB_ENV
       - name: is gh-pages available
-        if: steps.test.outputs.ghp == 0
+        if: contains(steps.test.outputs.ghp, 0)
         run: echo "available"
       - name: is gh-pages not available
-        if: steps.test.outputs.ghp != 0
+        if: !contains(steps.test.outputs.ghp, 0)
         run: echo "not available"
