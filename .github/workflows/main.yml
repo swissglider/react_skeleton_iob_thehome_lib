@@ -65,11 +65,7 @@ jobs:
           "create_pages"
         ]
     # if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
-    if: (needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true' && contains([
-          "deploy",
-          "publish",
-          "create_pages"
-        ], needs.file_contents.outputs.ACTION_MODE) == true) == 'true'
+    if: (needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true' && contains([ "deploy","publish", "create_pages"], needs.file_contents.outputs.ACTION_MODE) == true) == 'true'
     runs-on: ubuntu-latest
     needs: [file_contents]
     steps:
