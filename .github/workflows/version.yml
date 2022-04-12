@@ -17,6 +17,6 @@ jobs:
       # - run: git show $REVISION:$FILENAME
       - id: test
         run: |
-          test=git branch -a | grep -q 'remotes/origin/gh-pages'
-          echo "::set-output name=test::${{test}}"
+          test1=git branch -a | grep -q 'remotes/origin/gh-pages'
+          echo "::set-output name=test::${{test1}}"
       - run: echo "${{steps.test.outputs.test}}"
