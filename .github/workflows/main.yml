@@ -64,8 +64,7 @@ jobs:
           "publish",
           "create_pages"
         ]
-    # if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
-    if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true' && contains(["deploy","publish","create_pages"], needs.file_contents.outputs.ACTION_MODE) == true
+    if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'
     runs-on: ubuntu-latest
     needs: [file_contents]
     steps:
@@ -75,6 +74,12 @@ jobs:
           echo "::notice file=publish::Mode accapted: ${{contains(env.ACCEPTED_ACTION_MODES, needs.file_contents.outputs.ACTION_MODE) == true}}" 
           echo "::notice file=publish::Is not the same version: ${{needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true'}}" 
           echo "::notice file=publish::Whole check: ${{(needs.file_contents.outputs.NOT_THE_SAME_VERSION == 'true' && contains(env.ACCEPTED_ACTION_MODES, needs.file_contents.outputs.ACTION_MODE) == true) == 'true'}}" 
+      - name: wrongActionMode
+        if: contains(env.ACCEPTED_ACTION_MODES, needs.file_contents.outputs.ACTION_MODE) == false
+        run: echo "Action Mode is not ok"
+      - name: rightActionMode
+        if: contains(env.ACCEPTED_ACTION_MODES, needs.file_contents.outputs.ACTION_MODE) == true
+        run: echo "Action Mode is ok"
       # - uses: actions/checkout@v1
       # - uses: actions/setup-node@v1
       #   with:
