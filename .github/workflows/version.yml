@@ -23,6 +23,6 @@ jobs:
       - name: is gh-pages available
         if: contains(steps.test.outputs.ghp, 0)
         run: echo "available"
-      - name: is gh-pages not available
-        if: !contains(steps.test.outputs.ghp, 0)
-        run: echo "not available"
+      # - name: is gh-pages not available
+      #   if: !contains(steps.test.outputs.ghp, 0)
+      #   run: echo "not available"
