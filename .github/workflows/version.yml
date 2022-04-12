@@ -17,7 +17,7 @@ jobs:
       # - run: git show $REVISION:$FILENAME
       - id: test
         run: |
-          echo "::set-output name=ghp::$(git branch -a | grep -q 'remotes/origin/gh-pages' && echo $?)"
+          echo "::set-output name=ghp::$(git branch -a | grep -q 'remotes/origin/gh-pages1' && echo $?)"
       - run: echo "${{steps.test.outputs.ghp}}"
       # - run: echo "ACTION_MODE=${{ fromJson(env.TEST_TEST).actionMode }}" >> $GITHUB_ENV
       - name: is gh-pages available
