@@ -38,13 +38,6 @@ jobs:
           echo 'CONFIG_FILE<<EOF' >> $GITHUB_ENV
           cat ./test.json >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-      - name: setActionMode
-        run: echo "ACTION_MODE=${{ fromJson(env.CONFIG_FILE).actionMode }}" >> $GITHUB_ENV
-      - name: printActionMode
-        run: echo '${{env.ACTION_MODE}}'
-      - name: correctActionMode
-        if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE)
-        run: echo "Action Mode is ok"
       - name: wrongActionMode
         if: contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE) == false
         run: echo "Action Mode is not ok"
