@@ -18,6 +18,6 @@ jobs:
       - id: test
         run: |
           echo "::set-output name=npm_version::$(npm view @${{github.repository}} version)"
-          echo "::set-output name=ghp::$(git branch -a | grep -q 'remotes/origin/gh-pages')"
+          echo "::set-output name=ghp::$(git branch -a | grep -q 'remotes/origin/gh-pages' && echo $?)"
       - run: echo "${{steps.test.outputs.npm_version}}"
       - run: echo "${{steps.test.outputs.ghp}}"
