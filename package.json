@@ -1,6 +1,6 @@
 {
   "name": "@swissglider/react_skeleton_iob_thehome_lib",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "This is an addon to the react_skeleton_framework and handles the ioBroker part that connects to the theHome adapters",
   "scripts": {
     "test": "echo hallo",
