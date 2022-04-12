@@ -52,8 +52,10 @@ jobs:
           echo "::set-output name=npm_version::$(npm view @${{github.repository}} version)"
       - name: output all
         run: |
-          echo "::notice file=package.json::Version changed: ${{fromJson(env.PACKAGE_JSON).version}} => $(npm view @${{github.repository}} version)"
-          echo "::notice file=package.json::NOT_THE_SAME_VERSION = ${{fromJson(env.PACKAGE_JSON).version != npm view @${{github.repository}} version}}"
+          npm_version=$(npm view @${{github.repository}} version)
+          echo "$npm_version"
+          echo "::notice file=package.json::Version changed: ${{fromJson(env.PACKAGE_JSON).version}} => ${{steps.RLNPV.outputs.npm_version}}"
+          echo "::notice file=package.json::NOT_THE_SAME_VERSION = ${{fromJson(env.PACKAGE_JSON).version != steps.RLNPV.outputs.npm_version}}"
           echo "::notice file=package.json::ACTION_MODE = ${{ fromJson(env.CONFIG_FILE).actionMode }}"
 
   publish:
