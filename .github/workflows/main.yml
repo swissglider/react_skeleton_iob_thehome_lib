@@ -84,13 +84,13 @@ jobs:
             echo "${{needs.file_contents.outputs.ACTION_MODE}}"
             echo "${{needs.file_contents.outputs.NOT_THE_SAME_VERSION}}"
         - name: The Same
-          if: needs.file_contents.outputs.NOT_THE_SAME_VERSION
+          if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == false
           run: | 
             echo "::error file=package.json::Not the same Version on NPM and packages.json"
         - name: Not The Same
-          if: needs.file_contents.outputs.NOT_THE_SAME_VERSION
+          if: needs.file_contents.outputs.NOT_THE_SAME_VERSION == true
           run: | 
-            echo "::erroro file=package.json::The same Version on NPM and packages.json"
+            echo "::error file=package.json::The same Version on NPM and packages.json"
         # - uses: actions/checkout@v1
         # - uses: actions/setup-node@v1
         #   with:
