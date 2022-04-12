@@ -72,7 +72,7 @@ jobs:
       - name: print
         run: | 
           echo "::notice file=package.json::Version changed: ${{needs.file_contents.outputs.ACTION_MODE}}" 
-          echo "::notice file=package.json::Version changed: ${{contains(env.ACCEPTED_ACTION_MODES, env.ACTION_MODE) == false}}" 
+          echo "::notice file=package.json::Mode accapted: ${{contains(env.ACCEPTED_ACTION_MODES, needs.file_contents.outputs.ACTION_MODE) == true}}" 
       # - uses: actions/checkout@v1
       # - uses: actions/setup-node@v1
       #   with:
