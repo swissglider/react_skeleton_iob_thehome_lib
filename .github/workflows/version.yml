@@ -17,6 +17,6 @@ jobs:
       # - run: git show $REVISION:$FILENAME
       - id: test
         run: |
-          test1="$(git branch -a | grep -q 'remotes/origin/gh-pages')"
-          echo "::set-output name=test::$test"
-      - run: echo "${{steps.test.outputs.test}}"
+          echo "::set-output name=npm_version::$(npm view @${{github.repository}} version)"
+          echo "::set-output name=ghp::$(git branch -a | grep -q 'remotes/origin/gh-pages')"
+      - run: echo "${{steps.test.outputs.npm_version}}"
