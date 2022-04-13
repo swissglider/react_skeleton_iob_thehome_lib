@@ -2,6 +2,10 @@
   "name": "@swissglider/react_skeleton_iob_thehome_lib",
   "version": "0.0.28",
   "description": "This is an addon to the react_skeleton_framework and handles the ioBroker part that connects to the theHome adapters",
+  "author": {
+    "name": "Swissglider",
+    "email": "npm@mailschweiz.com"
+  },
   "scripts": {
     "test": "echo hallo",
     "rollup": "rollup -c",
@@ -20,7 +24,6 @@
     "skeleton",
     "react"
   ],
-  "author": "swissglider",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.17.8",
